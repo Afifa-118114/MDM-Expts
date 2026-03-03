@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Dynamic DOM Demo</title>
+
+<style>
+  body {
+    font-family: Arial;
+    text-align: center;
+    margin-top: 40px;
+  }
+
+  #box {
+    width: 120px;
+    height: 120px;
+    background-color: coral;
+    margin: 20px auto;
+    position: relative;
+  }
+
+  button {
+    margin: 5px;
+    padding: 8px 14px;
+    cursor: pointer;
+  }
+</style>
+</head>
+
+<body>
+
+<h2 id="text">Hello Afifa 👋</h2>
+
+<button onclick="changeText()">Change Text</button>
+<button onclick="hideText()">Hide</button>
+<button onclick="showText()">Show</button>
+<button onclick="toggleText()">Toggle</button>
+<button onclick="animateBox()">Animate Box</button>
+
+<div id="box"></div>
+
+<script>
+  // Change content
+  function changeText() {
+    document.getElementById("text").innerHTML =
+      "Content Updated Successfully! 🎉";
+  }
+
+  // Hide element
+  function hideText() {
+    document.getElementById("text").style.display = "none";
+  }
+
+  // Show element
+  function showText() {
+    document.getElementById("text").style.display = "block";
+  }
+
+  // Toggle element
+  function toggleText() {
+    let el = document.getElementById("text");
+    if (el.style.display === "none") {
+      el.style.display = "block";
+    } else {
+      el.style.display = "none";
+    }
+  }
+
+  // Simple animation
+  function animateBox() {
+    let box = document.getElementById("box");
+    let pos = 0;
+
+    let id = setInterval(frame, 5);
+
+    function frame() {
+      if (pos >= 300) {
+        clearInterval(id);
+      } else {
+        pos++;
+        box.style.left = pos + "px";
+      }
+    }
+  }
+</script>
+
+</body>
+</html>

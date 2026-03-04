@@ -1,87 +1,120 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<title>Dynamic DOM Demo</title>
+    <title>Login with Dark Mode</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
+            margin-top: 50px;
+            background-color: #f9f9f9;
+            color: #333;
+            transition: background-color 0.5s, color 0.5s;
+        }
 
-<style>
-  body {
-    font-family: Arial;
-    text-align: center;
-    margin-top: 40px;
-  }
+        button {
+            padding: 8px 15px;
+            margin: 5px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
 
-  #box {
-    width: 120px;
-    height: 120px;
-    background-color: coral;
-    margin: 20px auto;
-    position: relative;
-  }
+        .dark-mode {
+            background-color: #242424;
+            color: #f1f1f1;
+        }
+        .dark-mode input {
+            background-color: #666;
+            color: #f1f1f1;
+            border: 1px solid #888;
+        }
 
-  button {
-    margin: 5px;
-    padding: 8px 14px;
-    cursor: pointer;
-  }
-</style>
+        
+        .form-container {
+            display: none; 
+            border: 1px solid #ddd;
+            padding: 20px;
+            width: 300px;
+            margin: 20px auto;
+            border-radius: 8px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            transition: background-color 0.5s, color 0.5s;
+        }
+        .form-container input {
+            display: block;
+            margin: 10px auto;
+            padding: 8px;
+            width: 80%;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+    </style>
 </head>
-
 <body>
 
-<h2 id="text">Hello Afifa 👋</h2>
+<h2>Welcome</h2>
 
-<button onclick="changeText()">Change Text</button>
-<button onclick="hideText()">Hide</button>
-<button onclick="showText()">Show</button>
-<button onclick="toggleText()">Toggle</button>
-<button onclick="animateBox()">Animate Box</button>
+<button id="loginBtn">Login</button>
+<button id="logoutBtn" style="display:none;">Logout</button>
+<button id="toggleMode">Toggle Dark/Light Mode</button>
 
-<div id="box"></div>
+<div id="loginForm" class="form-container">
+    <h3>Login</h3>
+    <input type="text" id="username" placeholder="Username">
+    <input type="password" id="password" placeholder="Password">
+    <button id="submitLogin">Submit</button>
+</div>
 
 <script>
-  // Change content
-  function changeText() {
-    document.getElementById("text").innerHTML =
-      "Content Updated Successfully! 🎉";
-  }
+$(document).ready(function(){
+    let loggedIn = false;
 
-  // Hide element
-  function hideText() {
-    document.getElementById("text").style.display = "none";
-  }
-
-  // Show element
-  function showText() {
-    document.getElementById("text").style.display = "block";
-  }
-
-  // Toggle element
-  function toggleText() {
-    let el = document.getElementById("text");
-    if (el.style.display === "none") {
-      el.style.display = "block";
-    } else {
-      el.style.display = "none";
+    function updateButtons() {
+        if(loggedIn){
+            $("#loginBtn").hide();
+            $("#logoutBtn").show();
+            $("#loginForm").hide(); // hide form when logged in
+        } else {
+            $("#loginBtn").show();
+            $("#logoutBtn").hide();
+        }
     }
-  }
 
-  // Simple animation
-  function animateBox() {
-    let box = document.getElementById("box");
-    let pos = 0;
+    $("#loginBtn").click(function(){
+        $("#loginForm").fadeIn(500); // fade in on click
+    });
 
-    let id = setInterval(frame, 5);
+    $("#submitLogin").click(function(){
+        const username = $("#username").val();
+        const password = $("#password").val();
 
-    function frame() {
-      if (pos >= 300) {
-        clearInterval(id);
-      } else {
-        pos++;
-        box.style.left = pos + "px";
-      }
-    }
-  }
+        if(username && password){
+            $("#loginForm").fadeOut(1500, function(){
+                loggedIn = true;        
+                updateButtons();       
+                alert("Logged in successfully!");
+            });
+        } else {
+            alert("Please enter username and password.");
+        }
+    });
+
+    // Logout
+    $("#logoutBtn").click(function(){
+        loggedIn = false;
+        $("#username, #password").val(""); 
+        updateButtons();
+        alert("Logged out successfully!");
+    });
+
+    $("#toggleMode").click(function(){
+        $("body").toggleClass("dark-mode");
+    });
+
+    updateButtons();
+});
 </script>
 
 </body>

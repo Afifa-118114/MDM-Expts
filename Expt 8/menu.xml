@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE menu SYSTEM "menu.dtd">
+<?xml-stylesheet type="text/xsl" href="menu.xsl"?>
+
+<menu>
+    <item>
+        <name>Chicken Tikka Masala</name>
+        <category>Main Course</category>
+        <price>350</price>
+        <availability>Available</availability>
+    </item>
+
+    <item>
+        <name>Chicken Biryani</name>
+        <category>Main Course</category>
+        <price>300</price>
+        <availability>Available</availability>
+    </item>
+
+    <item>
+        <name>Spring Rolls</name>
+        <category>Starter</category>
+        <price>150</price>
+        <availability>Not Available</availability>
+    </item>
+
+    <item>
+        <name>Ice Cream</name>
+        <category>Dessert</category>
+        <price>99</price>
+        <availability>Available</availability>
+    </item>
+</menu>

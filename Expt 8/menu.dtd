@@ -1,0 +1,8 @@
+<!ELEMENT menu (item+)>
+
+<!ELEMENT item (name, category, price, availability)>
+
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT category (#PCDATA)>
+<!ELEMENT price (#PCDATA)>
+<!ELEMENT availability (#PCDATA)>
